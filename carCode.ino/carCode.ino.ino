@@ -24,25 +24,25 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   // read the sensor values
-  if (counter < 1000) {
+  if (counter < 5000) {
     sensorLeftValue = analogRead(leftSensor);
     sensorRightValue = analogRead(rightSensor);
     // map the sensor value to motor values
-    motorLeftValue = map(sensorLeftValue, 100, 300, 0, 150)
-    motorRightValue = map(sensorRigthValue, 100, 300, 0 150)
+    motorLeftValue = map(sensorLeftValue, 100, 300, 0, 150);
+    motorRightValue = map(sensorRightValue, 100, 300, 0, 150);
     // set the motor values
-    leftMotor->setSpeed(motorLeftValue)
-    rightMotor->setSpeed(motorRightValue)
+    leftMotor->setSpeed(motorLeftValue);
+    rightMotor->setSpeed(motorRightValue);
     // run the motors
-    leftMotor->run(FORWARD)
-    rightMotor->run(FORWARD)
-    delay(2)
-    counter++
+    leftMotor->run(FORWARD);
+    rightMotor->run(FORWARD);
+    delay(2);
+    counter++;
   } else {
-    leftMotor->setSpeed(0)
-    rightMotor->setSpeed(0)
-    leftMotor->run(FORWARD)
-    rightMotor->run(FORWARD)
+    leftMotor->setSpeed(0);
+    rightMotor->setSpeed(0);
+    leftMotor->run(FORWARD);
+    rightMotor->run(FORWARD);
   }
   
 }
