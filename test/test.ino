@@ -1,51 +1,8 @@
-//#include <Wire.h>
-//#include <Adafruit_MotorShield.h>
-//#include "utility/Adafruit_MS_PWMServoDriver.h"
-//
-//void setup() {
-//  // put your setup code here, to run once:
-//  Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
-//  Adafruit_DCMotor *myMotor = AFMS.getMotor(1);
-//  AFMS.begin();
-//  myMotor->setSpeed(30);
-//  myMotor->run(FORWARD);
-//  delay(10000);
-//  myMotor->setSpeed(0);
-//  myMotor->run(FORWARD);
-//}
-//
-//void loop() {
-//  // put your main code here, to run repeatedly:
-//}
+const int pSensePin = A0;  // Starboard Sensor
+const int sSensePin = A1;  // Port Sensor
 
-/*
-  Analog input, analog output, serial output
-
-  Reads an analog input pin, maps the result to a range from 0 to 255 and uses
-  the result to set the pulse width modulation (PWM) of an output pin.
-  Also prints the results to the Serial Monitor.
-
-  The circuit:
-  - potentiometer connected to analog pin 0.
-    Center pin of the potentiometer goes to the analog pin.
-    side pins of the potentiometer go to +5V and ground
-  - LED connected from digital pin 9 to ground
-
-  created 29 Dec. 2008
-  modified 9 Apr 2012
-  by Tom Igoe
-
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/AnalogInOutSerial
-*/
-
-// These constants won't change. They're used to give names to the pins used:
-const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
-const int analogOutPin = 9; // Analog output pin that the LED is attached to
-
-int sensorValue = 0;        // value read from the pot
-int outputValue = 0;        // value output to the PWM (analog out)
+int pSenseValue = 0;        // value read from the port sensor
+int sSenseValue = 0;        // value read from the starboard sensor
 
 void setup() {
   // initialize serial communications at 9600 bps:
@@ -54,17 +11,12 @@ void setup() {
 
 void loop() {
   // read the analog in value:
-  sensorValue = analogRead(analogInPin);
-  // map it to the range of the analog out:
-  outputValue = map(sensorValue, 0, 1023, 0, 255);
-  // change the analog out value:
-//  analogWrite(analogOutPin, outputValue);
-
+  pSenseValue = analogRead(pSensePin);
+  sSenseValue = analogRead(sSensePin);
   // print the results to the Serial Monitor:
-  Serial.println(sensorValue);
-//  Serial.print("\t output = ");
-//  Serial.println(outputValue);
-
+  Serial.print(pSenseValue);
+  Serial.print('x')
+  Serial.print(sSenseValue)
   // wait 2 milliseconds before the next loop for the analog-to-digital
   // converter to settle after the last reading:
   delay(2);
