@@ -5,10 +5,10 @@
 // Define sensors, variables, and motors
 const int portSensor = A0;
 const int starboardSensor = A1;
-int sensorLeftValue = 0;
-int sensorRightValue = 0;
-int motorLeftValue = 0;
-int motorRightValue = 0;
+int sensorPortValue = 0;
+int sensorStarboardValue = 0;
+int motorPortValue = 0;
+int motorStarboardValue = 0;
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 Adafruit_DCMotor *portMotor = AFMS.getMotor(1);
 Adafruit_DCMotor *starboardMotor = AFMS.getMotor(2);
@@ -25,14 +25,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   // read the sensor values
   if (counter < 5000) {
-    sensorLeftValue = analogRead(portSensor);
-    sensorRightValue = analogRead(starboardSensor);
+    sensorPortValue = analogRead(portSensor);
+    sensorStarboardValue = analogRead(starboardSensor);
     // map the sensor value to motor values
-    motorLeftValue = map(sensorLeftValue, 100, 300, 0, 150);
-    motorRightValue = map(sensorRightValue, 100, 300, 0, 150);
+    motorPortValue = map(sensorPortValue, 100, 300, 0, 150);
+    motorStarboardValue = map(sensorStarboardValue, 100, 300, 0, 150);
     // set the motor values
-    portMotor->setSpeed(motorLeftValue);
-    starboardMotor->setSpeed(motorRightValue);
+    portMotor->setSpeed(motorPortValue);
+    starboardMotor->setSpeed(motorStarboardValue);
     // run the motors
     portMotor->run(FORWARD);
     starboardMotor->run(FORWARD);
