@@ -19,6 +19,7 @@ void setup() {
   // put your setup code here, to run once:
   // start the controller
   AFMS.begin();
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -27,6 +28,18 @@ void loop() {
   sensorPortValue = analogRead(portSensor);
   sensorStarboardValue = analogRead(starboardSensor);
   // map the sensor value to motor values
+  portMotor->setSpeed(30);
+  starboardMotor->setSpeed(30);
+  if (sensorPortValue > 800) {
+      portMotor->run(BACKWARD);
+  }
+  else {portMotor->run(FORWARD);}
+  
+  if (sensorStarboardValue > 800) {
+      starboardMotor->run(BACKWARD);
+  }
+  else {starboardMotor->run(FORWARD);}
+  /*
   motorPortValue = map(sensorPortValue, 0, 1024, -65, 65);
   motorStarboardValue = map(sensorStarboardValue, 0, 1024, -65, 65);
   // set the motor values
@@ -35,4 +48,5 @@ void loop() {
   // run the motors
   portMotor->run(motorPortValue < 0 ? BACKWARD: FORWARD);
   starboardMotor->run(motorStarboardValue < 0 ? BACKWARD: FORWARD);
+  */
 }
