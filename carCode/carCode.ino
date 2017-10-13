@@ -73,14 +73,4 @@ void loop() {
       Serial.println();
     }
   }
-  /*
-    motorPortValue = map(sensorPortValue, 0, 1024, -65, 65);
-    motorStarboardValue = map(sensorStarboardValue, 0, 1024, -65, 65);
-    // set the motor values
-    portMotor->setSpeed(abs(motorPortValue));
-    starboardMotor->setSpeed(abs(motorStarboardValue));
-    // run the motors
-    portMotor->run(motorPortValue < 0 ? BACKWARD: FORWARD);
-    starboardMotor->run(motorStarboardValue < 0 ? BACKWARD: FORWARD);
-  */
 }
