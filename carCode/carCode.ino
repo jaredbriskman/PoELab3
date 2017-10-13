@@ -3,8 +3,8 @@
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 // Define sensors, variables, and motors
-const int portSensor = A0;
-const int starboardSensor = A1;
+const int portSensor = A2;
+const int starboardSensor = A0;
 int sensorPortValue = 0;
 int sensorStarboardValue = 0;
 int motorPortValue = 0;
@@ -24,25 +24,15 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   // read the sensor values
-  if (counter < 5000) {
-    sensorPortValue = analogRead(portSensor);
-    sensorStarboardValue = analogRead(starboardSensor);
-    // map the sensor value to motor values
-    motorPortValue = map(sensorPortValue, 100, 300, 0, 150);
-    motorStarboardValue = map(sensorStarboardValue, 100, 300, 0, 150);
-    // set the motor values
-    portMotor->setSpeed(motorPortValue);
-    starboardMotor->setSpeed(motorStarboardValue);
-    // run the motors
-    portMotor->run(FORWARD);
-    starboardMotor->run(FORWARD);
-    delay(2);
-    counter++;
-  } else {
-    portMotor->setSpeed(0);
-    starboardMotor->setSpeed(0);
-    portMotor->run(FORWARD);
-    starboardMotor->run(FORWARD);
-  }
-  
+  sensorPortValue = analogRead(portSensor);
+  sensorStarboardValue = analogRead(starboardSensor);
+  // map the sensor value to motor values
+  motorPortValue = map(sensorPortValue, 0, 1024, -65, 65);
+  motorStarboardValue = map(sensorStarboardValue, 0, 1024, -65, 65);
+  // set the motor values
+  portMotor->setSpeed(abs(motorPortValue));
+  starboardMotor->setSpeed(abs(motorStarboardValue));
+  // run the motors
+  portMotor->run(motorPortValue < 0 ? BACKWARD: FORWARD);
+  starboardMotor->run(motorStarboardValue < 0 ? BACKWARD: FORWARD);
 }
