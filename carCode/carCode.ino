@@ -30,15 +30,27 @@ void loop() {
   // map the sensor value to motor values
   portMotor->setSpeed(30);
   starboardMotor->setSpeed(30);
+  Serial.print(sensorPortValue);
+  Serial.print(",");
+  Serial.print(sensorStarboardValue);
+  Serial.print(",");
   if (sensorPortValue > 800) {
       portMotor->run(BACKWARD);
-  }
-  else {portMotor->run(FORWARD);}
+      Serial.print("-1");
+      }
+  else {portMotor->run(FORWARD);
+        Serial.print("1");
+        }
+  Serial.print(",");
   
   if (sensorStarboardValue > 800) {
       starboardMotor->run(BACKWARD);
+      Serial.print("-1");
   }
-  else {starboardMotor->run(FORWARD);}
+  
+  else {starboardMotor->run(FORWARD);
+        Serial.print("1");}
+  Serial.println();
   /*
   motorPortValue = map(sensorPortValue, 0, 1024, -65, 65);
   motorStarboardValue = map(sensorStarboardValue, 0, 1024, -65, 65);
